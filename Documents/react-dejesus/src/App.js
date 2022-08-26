@@ -1,5 +1,5 @@
-import NavBar from './Header/NavBar.js';
-import ItemListContainer from './Main/ItemListContainer';
+import NavBar from './NavBar/NavBar.js';
+import ItemListContainer from './ItemListContainer/ItemListContainer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <NavBar/>
-      <ItemListContainer/>
+      <ItemListContainer  saludo="Bienvenidx a mi primera app de React"/>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import '../Header/NavBar.css'
+import './NavBar.css'
 import CartWidget from "./CartWidget"
 
 const NavBar = () =>  {

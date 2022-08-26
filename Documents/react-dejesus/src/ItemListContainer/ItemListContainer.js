@@ -1,11 +1,11 @@
-import '../Main/ItemListContainer.css'
+import './ItemListContainer.css'
 
-const ItemListContainer = () => {
+const ItemListContainer = ({saludo}) => {
 
     return(
         <section className='backgroundMain'>
             <p className="texto">
-            Bienvenidx a mi primera app de React.
+                {saludo}
             </p>    
         </section>
     )
