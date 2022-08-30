@@ -1,4 +1,6 @@
 import './ItemListContainer.css'
+import './ItemCount'
+import ItemCount from './ItemCount'
 
 const ItemListContainer = ({saludo}) => {
 
@@ -6,8 +8,11 @@ const ItemListContainer = ({saludo}) => {
         <section className='backgroundMain'>
             <p className="texto">
                 {saludo}
-            </p>    
+            </p> 
+            <ItemCount stock='5' inicial= '1' /> 
+    
         </section>
+           
     )
 }
 export default ItemListContainer
