@@ -33,6 +33,7 @@ const ItemCount = ({ stock, inicial }) => {
     }
 
     return (
+    
         <div className="container my-5">
             <button className="mx-2 btn btn-danger" onClick={handleRestar}> - </button>
             <span>{count}</span>
