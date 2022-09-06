@@ -1,14 +1,27 @@
-import NavBar from './NavBar/NavBar.js';
-import ItemListContainer from './ItemListContainer/ItemListContainer';
+import { NavBar } from './components/NavBar/NavBar.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import ItemDetailContainer from "./components/ItemDetailContainer/ItemDetailContainer";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 
-function App() {
+const App = ()=> {
+  
   return (
-    <div>
-      <NavBar/>
-      <ItemListContainer  saludo="Bienvenidx a mi primera app de React"/>
-    </div>
+
+    <BrowserRouter>
+     
+      <NavBar />
+     
+      <Routes>
+            <Route path='/' element={ <ItemListContainer/> }/>
+            <Route path='/productos/:Id' element={<ItemListContainer/>} />
+            <Route path='/item/:itemId' element={<ItemDetailContainer />}/>
+            <Route path='*' element={ <Navigate to="/"/>} />
+      </Routes>
+    
+    </BrowserRouter>
+
   );
 }
 

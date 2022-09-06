@@ -1,0 +1,40 @@
+.backgroundMain{
+    background-color: rgb(206, 166, 244);
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    /* height: 150vh; */
+    display: flex;
+    flex-direction: columng;
+}
+
+.texto{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: #f6264e;
+    font: bold 20pt "Josefin Sans";
+    padding: 60pt;
+}
+
+.producto{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    padding: 20pt;
+}
+
+
+
+
+.producto img {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.prod-text {
+    color: #f6264e;
+    font: bold 16pt "Belleza";
+}
