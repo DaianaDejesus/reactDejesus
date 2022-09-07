@@ -12,18 +12,18 @@ const ItemListContainer = () => {
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(true)
 
-    const { nombreId } = useParams()
-    console.log(nombreId)
+    const { categoriaId } = useParams()
+    console.log(categoriaId)
 
     useEffect(() => {
         setLoading(true)
 
         pedirDatos()
             .then( (res) => {
-                if (!nombreId) {
+                if (!categoriaId) {
                     setProductos(res)
                 } else {
-                    setProductos( res.find((prod) => prod.nombre === nombreId) )
+                    setProductos( res.filter((prod) => prod.categoria === categoriaId) )
                 }
             })
             .catch( (error) => {
@@ -32,7 +32,7 @@ const ItemListContainer = () => {
             .finally(() => {
                 setLoading(false)
             })
-    }, [nombreId])
+    }, [categoriaId])
 
 
     return (
