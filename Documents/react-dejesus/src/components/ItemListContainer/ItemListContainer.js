@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { pedirDatos } from "../../helpers/pedirDatos"
+import { Spinner } from "reactstrap";
 
 import ItemList from "./ItemList"
 import { useParams } from 'react-router-dom'
@@ -41,8 +42,12 @@ const ItemListContainer = () => {
             <div >
             {
                 loading 
-                ? <h2 className="texto">Cargando...</h2>
+                ? <h2 className="texto">Cargando...
+               <Spinner color="danger" />
+                </h2>
+
                 : <ItemList productos={productos} />
+
             }
             </div>
             
