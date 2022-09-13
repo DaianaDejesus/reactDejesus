@@ -1,14 +1,10 @@
-import { useState } from "react"
+import React, { useState } from "react"
+import { Button } from "reactstrap"
+import { Link } from "react-router-dom"
 
+const ItemCount = ({stock, handleAgregar}) => {
 
-
-const ItemCount = ({ stock, inicial }) => {
-
-
-
-
-    const [count, setCount] = useState(1);
-
+    let[count, setCount]= useState(0)
 
     const handleSumar = () => {
         if (count < stock) {
@@ -19,26 +15,20 @@ const ItemCount = ({ stock, inicial }) => {
         }
     }
 
-    function handleRestar() {
-        if (count > inicial) {
+    const handleRestar = () => {
+        if (count > 0) {
             setCount(count - 1);
         }
     }
 
-    const onAdd = () => {
-        if (count <= stock) {
-            console.log("Se añadió al carrito", count)
-        }
-
-    }
-
     return (
     
-        <div className="container my-5">
-            <button className="mx-2 btn btn-danger" onClick={handleRestar}> - </button>
+        <div className="prod-text">
+            <Button className="mx-2 btn btn-danger" onClick={handleRestar}> - </Button>
             <span>{count}</span>
-            <button className="mx-2 btn btn-danger" onClick={handleSumar}> + </button>
-            <button className='my-2 btn btn-danger' disabled={stock <= 0} onClick={() => onAdd(count)}>Añadir al carrito</button>
+            <Button className="mx-2 btn btn-danger" onClick={handleSumar}> + </Button>
+            <Button className='mx-2 btn btn-danger' onClick={()=> handleAgregar(count)}>Añadir al carrito</Button>
+            <Link to="../cart" className="btn btn-danger mx-2">Terminar compra</Link>
         </div>
     )
 }
