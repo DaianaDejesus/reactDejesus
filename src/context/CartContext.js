@@ -36,7 +36,7 @@ export const CartProvider = ({children}) => {
             background: '#000',
             color: '#FFFFFF',
             confirmButtonColor: '#1894d6',
-            cancelButtonColor: '#d44',
+            cancelButtonText: 'No, lo quiero todo.',
             confirmButtonText: 'Sí, vaciar.'
         }).then((result) => {
             if (result.isConfirmed) {
