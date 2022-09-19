@@ -1,12 +1,22 @@
 import { useContext } from "react"
 import { CartContext } from "../../context/CartContext"
 import { Button } from "reactstrap"
+import { Link } from "react-router-dom"
 import { BsFillTrashFill } from 'react-icons/bs'
 
 
 const Cart = () => {
 
     const { cart, cartTotal, emptyCart, removeItem } = useContext(CartContext)
+
+    if (cart.length === 0){
+        return(
+            <div className='backgroundMain producto'>
+                <h2 className='prod-text'> Tu carrito está vacío. </h2>
+                <Link to="/" className="btn btn-danger"> Volver a la tienda </Link>
+            </div>
+        )
+    }
 
     return (
         <div className='backgroundMain producto'>

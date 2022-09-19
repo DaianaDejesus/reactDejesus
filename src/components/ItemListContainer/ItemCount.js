@@ -22,9 +22,10 @@ const ItemCount = ({stock, handleAgregar, count, setCount}) => {
     return (
     
         <div className="prod-text">
-            <Button className="mx-2 btn btn-danger" onClick={handleRestar}> - </Button>
+            <Button className="mx-2 btn btn-danger" onClick={handleRestar}
+            disabled= {count === 1 }> - </Button>
             <span>{count}</span>
-            <Button className="mx-2 btn btn-danger" onClick={handleSumar}> + </Button>
+            <Button className="mx-2 btn btn-danger" onClick={handleSumar} disabled= {count === stock }> + </Button>
             <Button className='mx-2 btn btn-danger' onClick={()=> handleAgregar(count)}>Añadir al carrito</Button>
         </div>
     )

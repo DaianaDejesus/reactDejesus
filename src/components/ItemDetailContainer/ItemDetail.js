@@ -41,7 +41,7 @@ const ItemDetail = ({ item }) => {
             <h4 className='prod-text'>Categoría: {item.categoria}</h4>
             {
                 isInCart(item.id)
-                    ?   <Link to="/cart" className="btn btn-success my-2">Terminar compra.</Link>
+                    ?   <Link to="/cart" className="btn btn-danger my-2">Terminar compra.</Link>
                     :   <ItemCount
                             stock={item.stock}
                             count={cantidad}

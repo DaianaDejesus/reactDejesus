@@ -1,8 +1,12 @@
 import './NavBar.css'
 import { Link } from 'react-router-dom'
 import CartWidget from './CartWidget'
+import { CartContext } from '../../context/CartContext'
+import { useContext } from 'react'
 
 export const NavBar = () =>  {
+  
+  const { cart } = useContext (CartContext)
 
   return(
 
@@ -31,7 +35,7 @@ export const NavBar = () =>  {
                     <Link className="nav-link" to="/productos/ceramica">Cerámicas</Link>
                   </li>
                 </ul>
-                <CartWidget />
+               { cart.length >0 && <CartWidget />}
 
               </div>
             </div>

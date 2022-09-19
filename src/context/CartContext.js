@@ -30,12 +30,13 @@ export const CartProvider = ({children}) => {
     const emptyCart = () => {
 
         Swal.fire({
-            title: 'Estas segurx?',
-            icon: '¡Cuidado!',
+            title: '¿Deseas vaciar tu carrito?',
+            icon: 'question',
             showCancelButton: true,
-            background: '#000',
-            color: '#FFFFFF',
-            confirmButtonColor: '#1894d6',
+            background: '#FFB8C8',
+            color: '#F6264e',
+            confirmButtonColor: '#D3BCF6',
+            cancelButtonColor: '#F6264e',
             cancelButtonText: 'No, lo quiero todo.',
             confirmButtonText: 'Sí, vaciar.'
         }).then((result) => {
