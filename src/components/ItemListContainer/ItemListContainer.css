@@ -18,6 +18,16 @@
     padding: 60pt;
 }
 
+.textoLabel{
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: left;
+    color: #f6264e;
+    font: 14pt "Josefin Sans";
+    padding: 5pt;
+}
+
 .producto{
     display: flex;
     flex-wrap: wrap;
