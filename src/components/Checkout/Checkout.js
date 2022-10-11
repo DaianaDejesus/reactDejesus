@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { Navigate } from "react-router-dom"
 import { useCartContext } from '../../context/CartContext'
-import { addDoc, collection } from "firebase/firestore"
+import { addDoc, collection, getDocs, writeBatch, query, where, documentId } from 'firebase/firestore'
 import { db } from "../../firebase/config"
+import useForm from "../../hooks/userForm"
 
 
 const Checkout = () => {
@@ -11,20 +12,13 @@ const Checkout = () => {
 
     const [ordenId, setOrdenId] = useState(null)
 
-    const [values, setValues] = useState({
+    const { values, handleInputChange } = useForm({
         nombre: '',
         email: '',
         telefono: ''
     })
 
-    const handleInputChange = (e) => {
-        setValues({
-            ...values,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         const orden = {
@@ -32,15 +26,52 @@ const Checkout = () => {
             items: cart,
             total: cartTotal()
         }
+        if (values.nombre.length < 2) {
+            alert('Nombre no corresponde.')
+            return
+        }
 
-        const ordensRef = collection(db, 'ordenNueva')
+        if (values.email.length < 2) {
+            alert('Email no corresponde.')
+            return
+        }
+        
+        const batch = writeBatch(db)
+        const ordenesRef = collection(db, 'ordenNueva')
+        const productosRef = collection(db, 'productos')
+        
+        const q = query(productosRef, where(documentId(), 'in', cart.map(item => item.id)))
 
-        addDoc(ordensRef, orden)
-            .then((doc) => {
-                console.log(doc.id)
-                setOrdenId(doc.id)
-                terminarCompra()
-            })
+        const productos = await getDocs(q)
+
+        const sinStock = []
+
+        productos.docs.forEach((doc) => {
+            const itemEnCarrito = cart.find(item => item.id === doc.id)
+
+            if (doc.data().stock >= itemEnCarrito.cantidad) {
+                batch.update(doc.ref, {
+                    stock: doc.data().stock - itemEnCarrito.cantidad
+                })
+            } else {
+                sinStock.push(itemEnCarrito)
+            }
+        })
+
+        if (sinStock.length === 0) {
+            batch.commit()
+                .then(() => {
+                    addDoc(ordenesRef, orden)
+                        .then((doc) => {
+                            console.log(doc.id)
+                            setOrdenId(doc.id)
+                            terminarCompra()
+                        })
+                })
+        } else {
+            alert("Hay items sin stock")
+            console.log(sinStock)
+        }
     }
 
     if (ordenId) {
@@ -71,7 +102,7 @@ const Checkout = () => {
                     name="nombre"
                     onChange={handleInputChange}
                     value={values.nombre}
-                    type={'text'}
+                    type={'nombre'}
                     className="form-control"
                     placeholder="Ingresa tu nombre y apellido."
                 />
@@ -92,7 +123,7 @@ const Checkout = () => {
                     name="telefono"
                     onChange={handleInputChange}
                     value={values.telefono}
-                    type={'text'}
+                    type={'telefono'}
                     className="form-control"
                     placeholder="Ingresa tu celular."
                 />
